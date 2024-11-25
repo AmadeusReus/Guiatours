@@ -1,0 +1,99 @@
+README - Proyecto GUIATOURS
+Descripción
+GUIATOURS es una plataforma para conectar turistas con guías turísticos en Colombia. 
+Este documento explica cómo configurar el proyecto en un entorno local para que puedas ejecutarlo y verlo.
+
+Contenido
+El proyecto está dividido en tres partes:
+
+Base de Datos (MySQL)
+Backend (Node.js)
+Frontend (React con Vite)
+
+Recapitulación
+Importa la base de datos.
+Configura y ejecuta el backend.
+Configura y ejecuta el frontend.
+Abre el navegador en http://localhost:5173 y explora el proyecto.
+
+Requisitos
+Antes de comenzar, asegúrate de tener instalado lo siguiente:
+
+MySQL: Para manejar la base de datos.
+Node.js: Permite ejecutar el backend y gestionar las dependencias del proyecto.
+Un editor de texto como Visual Studio Code (opcional, pero recomendado).
+Navegador web: Para ver el proyecto (Chrome, Firefox, Edge, etc.).
+
+Configuración Paso a Paso
+1. Configurar la Base de Datos
+Abrir MySQL:
+
+Si usas una herramienta como phpMyAdmin o MySQL Workbench, ábrela.
+Si usas línea de comandos, abre el programa MySQL Command Line Client.
+Crear la base de datos:
+
+Escribe o importa el archivo guiatour.sql que se encuentra en el paquete del proyecto.
+Si usas una herramienta visual, busca la opción para importar y selecciona el archivo guiatour.sql.
+Verifica los datos:
+
+La base de datos debería contener tablas como ciudades, guias, usuarios, etc.
+Si no ves las tablas, revisa el archivo guiatour.sql y vuelve a importarlo.
+
+OJO que si no se muestran los datos es porque la base de datos no está instalada correctamente.
+
+2. Configurar el Backend
+Abrir la carpeta del backend:
+
+Ve a la carpeta llamada guiatours-backend (dentro del paquete del proyecto).
+
+1. Instalar Dependencias para el Backend
+Ve a la carpeta del backend.
+
+Abre una terminal en esa carpeta.
+
+Escribe el siguiente comando: npm install
+Esto descargará todas las dependencias necesarias que están listadas en el archivo package.json.
+
+Configurar la conexión a la base de datos:
+
+Busca un archivo llamado config/db.js.
+Ábrelo con un editor de texto y actualiza esta parte:
+
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: '<tu_usuario>',       // Reemplaza con tu usuario de MySQL (por lo general es root)
+  password: '<tu_contraseña>', // Reemplaza con tu contraseña de MySQL (a veces es un campo vacio '')
+  database: 'guiatour',
+  port: 3306                  // Deja este valor si no cambiaste el puerto
+});
+
+Inicia el backend:
+
+Haz doble clic en el archivo server.js o sigue las instrucciones del editor de texto o abre la terminal en 
+la ubicacion de la carpeta del backend y escribes node server.js, le das enter.
+El backend estará corriendo en http://localhost:5000.
+
+Prueba el backend:
+
+Abre un navegador web y escribe http://localhost:5000. Si ves un mensaje como "Backend funcionando correctamente", está todo listo.
+
+
+3. Configurar el Frontend
+Abrir la carpeta del frontend:
+
+Ve a la carpeta llamada guiatours-frontend (dentro del paquete del proyecto).
+Verificar la configuración:
+
+Abre los archivos donde se realizan solicitudes al backend (por ejemplo, src/components/DestinationDetails.jsx).
+Asegúrate de que las rutas al backend comienzan con http://localhost:5000.
+Inicia el frontend:
+
+Busca un archivo llamado package.json y ábrelo para verificar las dependencias.
+Ejecuta el comando proporcionado para iniciar el frontend: npm run dev 
+El frontend estará corriendo en http://localhost:5173.
+
+
+Si algo no funciona: Asegúrate de que ambos servidores (backend y frontend) están corriendo.
+Errores comunes:
+Si no puedes acceder a la base de datos, revisa las credenciales en config/db.js ubicado en la carpeta del backend.
+Si el navegador no carga datos, verifica que el backend esté funcionando correctamente.

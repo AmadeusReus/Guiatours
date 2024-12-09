@@ -72,6 +72,38 @@ INSERT INTO `ciudades` VALUES (1,'Cartagena','/images/cartagena.jpg','Cartagena 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `contratos`
+--
+
+DROP TABLE IF EXISTS `contratos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `contratos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `guia_id` int NOT NULL,
+  `usuario_id` int NOT NULL,
+  `num_personas` int NOT NULL DEFAULT '1',
+  `monto` decimal(10,2) NOT NULL,
+  `fecha` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `guia_id` (`guia_id`),
+  KEY `usuario_id` (`usuario_id`),
+  CONSTRAINT `contratos_ibfk_1` FOREIGN KEY (`guia_id`) REFERENCES `guias` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `contratos_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contratos`
+--
+
+LOCK TABLES `contratos` WRITE;
+/*!40000 ALTER TABLE `contratos` DISABLE KEYS */;
+INSERT INTO `contratos` VALUES (1,1,1,3,600000.00,'2024-11-29 09:51:33'),(2,2,3,2,320000.00,'2024-11-29 09:51:33'),(3,1,3,2,400000.00,'2024-11-29 10:02:44'),(4,1,3,1,200000.00,'2024-11-29 10:03:55'),(5,1,1,1,200000.00,'2024-12-03 04:23:51');
+/*!40000 ALTER TABLE `contratos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `guias`
 --
 
@@ -99,7 +131,7 @@ CREATE TABLE `guias` (
   UNIQUE KEY `email_2` (`email`),
   KEY `ciudad_id` (`ciudad_id`),
   CONSTRAINT `guias_ibfk_1` FOREIGN KEY (`ciudad_id`) REFERENCES `ciudades` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,8 +140,40 @@ CREATE TABLE `guias` (
 
 LOCK TABLES `guias` WRITE;
 /*!40000 ALTER TABLE `guias` DISABLE KEYS */;
-INSERT INTO `guias` VALUES (1,1,'Carlos Gómez','5 años de experiencia','Español, Inglés','/images/guias/carlos_gomez.jpg','Historia colonial','Apasionado por la historia y las historias que construyeron Cartagena. Mis tours son entretenidos y llenos de datos curiosos.','200,000 COP','Recorrido por la Ciudad Amurallada',4.80,'carlos.gomez@example.com','3001234567','123456789','2024-11-21 08:33:39'),(2,1,'Ana Torres','3 años de experiencia','Español, Francés','/images/guias/ana_torres.jpg','Arquitectura y cultura','Arquitecta de profesión, guía de corazón. Amo enseñar sobre los tesoros arquitectónicos de Cartagena.','160,000 COP','Tour por el Castillo San Felipe y alrededores',4.60,'ana.torres@example.com','3012345678','123456789','2024-11-21 08:33:39'),(3,2,'Juan Pérez','4 años de experiencia','Español, Inglés','/images/guias/juan_perez.jpg','Naturaleza y ecoturismo','Soy amante de la naturaleza y disfruto compartir las maravillas de Medellín y sus alrededores.','120,000 COP','Excursión en el Parque Arví',4.30,'juan.perez@example.com','3023456789','123456789','2024-11-21 08:33:39'),(4,2,'Laura Mejía','6 años de experiencia','Español, Alemán','/images/guias/laura_mejia.jpg','Arte urbano y transformación social','Guía especializada en tours por la Comuna 13. Cada grafiti cuenta una historia.','140,000 COP','Recorrido por la Comuna 13',4.90,'laura.mejia@example.com','3034567890','123456789','2024-11-21 08:33:39'),(5,3,'María Rodríguez','7 años de experiencia','Español, Inglés','/images/guias/maria_rodriguez.jpg','Historia y arte','Exploro la historia y el arte de Bogotá en cada rincón. Amo el Museo del Oro.','240,000 COP','Tour en el Museo del Oro',4.70,'maria.rodriguez@example.com','3045678901','123456789','2024-11-21 08:33:39'),(6,3,'Andrés López','5 años de experiencia','Español, Italiano','/images/guias/andres_lopez.jpg','Religión e historia','Soy guía en el Cerro de Monserrate, combinando vistas increíbles con historias espirituales.','180,000 COP','Caminata a Monserrate',4.50,'andres.lopez@example.com','3056789012','123456789','2024-11-21 08:33:39'),(7,4,'Sofía Martínez','6 años de experiencia','Español, Portugués','/images/guias/sofia_martinez.jpg','Historia y naturaleza','Soy guía especializada en tours por Cali, combinando historia y naturaleza en mis recorridos.','200,000 COP','Visita al Cristo Rey',4.60,'sofia.martinez@example.com','3067890123','123456789','2024-11-21 08:33:39'),(8,4,'José Hernández','4 años de experiencia','Español, Inglés','/images/guias/jose_hernandez.jpg','Familias y actividades','Mi pasión es trabajar con familias, asegurando que todos disfruten del Zoológico de Cali.','140,000 COP','Recorrido en el Zoológico de Cali',4.40,'jose.hernandez@example.com','3078901234','123456789','2024-11-21 08:33:39'),(9,5,'Manuel Gutiérrez','8 años de experiencia','Español, Inglés','/images/guias/manuel_gutierrez.jpg','Parques naturales y ecoturismo','Me encanta conectar a las personas con la naturaleza. El Parque Tayrona es mi hogar.','280,000 COP','Exploración en el Parque Tayrona',4.90,'manuel.gutierrez@example.com','3089012345','123456789','2024-11-21 08:33:39'),(10,5,'Carolina Suárez','5 años de experiencia','Español, Francés','/images/guias/carolina_suarez.jpg','Historia y cultura','Apasionada por la historia y las raíces culturales de Santa Marta.','200,000 COP','Visita a la Quinta de San Pedro Alejandrino',4.70,'carolina.suarez@example.com','3090123456','123456789','2024-11-21 08:33:39'),(11,6,'Ricardo Moreno','7 años de experiencia','Español, Inglés','/images/guias/ricardo_moreno.jpg','Fenómenos naturales y relax','Soy guía especializado en tours relajantes por San Andrés.','240,000 COP','Tour al Hoyo Soplador',4.80,'ricardo.moreno@example.com','3101234567','123456789','2024-11-21 08:33:39'),(12,6,'Liliana Ríos','4 años de experiencia','Español','/images/guias/liliana_rios.jpg','Playas y cultura raizal','Comparto la riqueza cultural y las playas paradisíacas de San Andrés.','220,000 COP','Visita a Johnny Cay',4.60,'liliana.rios@example.com','3112345678','123456789','2024-11-21 08:33:39'),(13,1,'Pedro Ramírez Gonzales','5 años de experiencia','Español, Inglés','No foto','Historia colonial','Guía apasionado por la historia y la cultura.','150,000 COP','Tour por la Ciudad Amurallada',0.00,'pedro.ramirez@example.com','3123456786','securepassword123','2024-11-21 09:53:47'),(14,3,'minombre','Información no disponible','No especificado','No foto','No especificado','Información no disponible','0 COP','Tour no especificado',0.00,'nombre@correo.com','3133002222','123456','2024-11-21 20:14:12');
+INSERT INTO `guias` VALUES (1,1,'Carlos Gómez','5 años de experiencia','Español, Inglés','/images/guias/carlos_gomez.jpg','Historia colonial','Apasionado por la historia y las historias que construyeron Cartagena. Mis tours son entretenidos y llenos de datos curiosos.','200,000 COP','Recorrido por la Ciudad Amurallada',4.80,'carlos.gomez@example.com','3001234567','123456789','2024-11-21 08:33:39'),(2,1,'Ana Torres','3 años de experiencia','Español, Francés','/images/guias/ana_torres.jpg','Arquitectura y cultura','Arquitecta de profesión, guía de corazón. Amo enseñar sobre los tesoros arquitectónicos de Cartagena.','160,000 COP','Tour por el Castillo San Felipe y alrededores',4.60,'ana.torres@example.com','3012345678','123456789','2024-11-21 08:33:39'),(3,2,'Juan Pérez','4 años de experiencia','Español, Inglés','/images/guias/juan_perez.jpg','Naturaleza y ecoturismo','Soy amante de la naturaleza y disfruto compartir las maravillas de Medellín y sus alrededores.','120,000 COP','Excursión en el Parque Arví',4.30,'juan.perez@example.com','3023456789','123456789','2024-11-21 08:33:39'),(4,2,'Laura Mejía','6 años de experiencia','Español, Alemán','/images/guias/laura_mejia.jpg','Arte urbano y transformación social','Guía especializada en tours por la Comuna 13. Cada grafiti cuenta una historia.','140,000 COP','Recorrido por la Comuna 13',4.90,'laura.mejia@example.com','3034567890','123456789','2024-11-21 08:33:39'),(5,3,'María Rodríguez','7 años de experiencia','Español, Inglés','/images/guias/maria_rodriguez.jpg','Historia y arte','Exploro la historia y el arte de Bogotá en cada rincón. Amo el Museo del Oro.','240,000 COP','Tour en el Museo del Oro',4.70,'maria.rodriguez@example.com','3045678901','123456789','2024-11-21 08:33:39'),(6,3,'Andrés López','5 años de experiencia','Español, Italiano','/images/guias/andres_lopez.jpg','Religión e historia','Soy guía en el Cerro de Monserrate, combinando vistas increíbles con historias espirituales.','180,000 COP','Caminata a Monserrate',4.50,'andres.lopez@example.com','3056789012','123456789','2024-11-21 08:33:39'),(7,4,'Sofía Martínez','6 años de experiencia','Español, Portugués','/images/guias/sofia_martinez.jpg','Historia y naturaleza','Soy guía especializada en tours por Cali, combinando historia y naturaleza en mis recorridos.','200,000 COP','Visita al Cristo Rey',4.60,'sofia.martinez@example.com','3067890123','123456789','2024-11-21 08:33:39'),(8,4,'José Hernández','4 años de experiencia','Español, Inglés','/images/guias/jose_hernandez.jpg','Familias y actividades','Mi pasión es trabajar con familias, asegurando que todos disfruten del Zoológico de Cali.','140,000 COP','Recorrido en el Zoológico de Cali',4.40,'jose.hernandez@example.com','3078901234','123456789','2024-11-21 08:33:39'),(9,5,'Manuel Gutiérrez','8 años de experiencia','Español, Inglés','/images/guias/manuel_gutierrez.jpg','Parques naturales y ecoturismo','Me encanta conectar a las personas con la naturaleza. El Parque Tayrona es mi hogar.','280,000 COP','Exploración en el Parque Tayrona',4.90,'manuel.gutierrez@example.com','3089012345','123456789','2024-11-21 08:33:39'),(10,5,'Carolina Suárez','5 años de experiencia','Español, Francés','/images/guias/carolina_suarez.jpg','Historia y cultura','Apasionada por la historia y las raíces culturales de Santa Marta.','200,000 COP','Visita a la Quinta de San Pedro Alejandrino',4.70,'carolina.suarez@example.com','3090123456','123456789','2024-11-21 08:33:39'),(11,6,'Ricardo Moreno','7 años de experiencia','Español, Inglés','/images/guias/ricardo_moreno.jpg','Fenómenos naturales y relax','Soy guía especializado en tours relajantes por San Andrés.','240,000 COP','Tour al Hoyo Soplador',4.80,'ricardo.moreno@example.com','3101234567','123456789','2024-11-21 08:33:39'),(12,6,'Liliana Ríos','4 años de experiencia','Español','/images/guias/liliana_rios.jpg','Playas y cultura raizal','Comparto la riqueza cultural y las playas paradisíacas de San Andrés.','220,000 COP','Visita a Johnny Cay',4.60,'liliana.rios@example.com','3112345678','123456789','2024-11-21 08:33:39'),(13,1,'Pedro Ramírez Gonzales','5 años de experiencia','Español, Inglés','No foto','Historia colonial','Guía apasionado por la historia y la cultura.','150,000 COP','Tour por la Ciudad Amurallada',0.00,'pedro.ramirez@example.com','3123456786','securepassword123','2024-11-21 09:53:47'),(14,3,'minombre apellido','1 año','español','No foto','No especificado','Información no disponible','20000 COP','Tour no especificado',0.00,'nombre@correo.com','3133002222','123456','2024-11-21 20:14:12'),(15,2,'pepe pepe','1 año','español','No foto','No especificado','Información no disponible','50000 COP','Tour no especificado',0.00,'pepe@correo.com','3116688010','123456','2024-11-22 19:48:59'),(16,5,'pepe sierra','1 año','español','No foto','cultura','aveces si','50000 COP','Tour por la playa',0.00,'elpepe@correo.com','3138118109','123456','2024-11-22 19:57:25');
 /*!40000 ALTER TABLE `guias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mensajes`
+--
+
+DROP TABLE IF EXISTS `mensajes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mensajes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `usuario_id` int NOT NULL,
+  `guia_id` int NOT NULL,
+  `contenido` text NOT NULL,
+  `emisor` enum('usuario','guia') NOT NULL,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `usuario_id` (`usuario_id`),
+  KEY `guia_id` (`guia_id`),
+  CONSTRAINT `mensajes_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `mensajes_ibfk_2` FOREIGN KEY (`guia_id`) REFERENCES `guias` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mensajes`
+--
+
+LOCK TABLES `mensajes` WRITE;
+/*!40000 ALTER TABLE `mensajes` DISABLE KEYS */;
+INSERT INTO `mensajes` VALUES (1,1,3,'¡Hola, me gustaría conocer más sobre tus tours!','usuario','2024-11-22 08:56:24'),(2,1,1,'hola como estas','usuario','2024-12-03 05:02:46'),(3,1,1,'hay un tour disponible?','usuario','2024-12-03 05:03:06'),(4,2,1,'¡Hola, tus tours!','usuario','2024-12-03 06:38:15');
+/*!40000 ALTER TABLE `mensajes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -133,7 +197,7 @@ CREATE TABLE `resenas_guias` (
   CONSTRAINT `fk_resenas_guias_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
   CONSTRAINT `resenas_guias_ibfk_1` FOREIGN KEY (`guia_id`) REFERENCES `guias` (`id`),
   CONSTRAINT `resenas_guias_chk_1` CHECK ((`calificacion` between 1 and 5))
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +206,7 @@ CREATE TABLE `resenas_guias` (
 
 LOCK TABLES `resenas_guias` WRITE;
 /*!40000 ALTER TABLE `resenas_guias` DISABLE KEYS */;
-INSERT INTO `resenas_guias` VALUES (1,1,'Excelente guía, muy conocedor de la ciudad.',5,'2024-11-15',1),(2,2,'Muy amable y profesional. Lo recomiendo.',4,'2024-11-16',2),(3,3,'Gran experiencia, pero podría ser más puntual.',3,'2024-11-17',3),(4,4,'Súper guía, nos ayudó mucho en el tour.',5,'2024-11-18',4),(5,5,'Conocía todos los secretos de la ciudad. Fascinante.',4,'2024-11-19',1),(6,6,'No estaba muy preparado para el clima, pero bien.',3,'2024-11-20',2),(7,7,'Gran actitud y súper carismática.',5,'2024-11-21',3),(8,8,'Podría mejorar la explicación en algunos puntos.',3,'2024-11-22',4),(9,9,'Nos mostró lugares ocultos, un gran guía.',5,'2024-11-23',1),(10,10,'Excelente comunicación y atención.',5,'2024-11-24',2),(11,11,'Un poco caro, pero valió la pena.',4,'2024-11-25',3),(12,12,'Muy profesional y atento. Recomendado.',5,'2024-11-26',4),(13,1,'Guía espectacular, aprendí muchísimo.',5,'2024-11-19',1),(14,1,'Estuvo ma o meno el guia.',3,'2024-11-20',3),(15,3,'Estuvo ma o meno el guia.',3,'2024-11-20',3),(16,5,'Estuvo ma o meno el guia.',2,'2024-11-20',2),(17,5,'Excelente guía, muy profesional.',5,'2024-11-20',1),(18,6,'hola',5,'2024-11-20',4),(19,6,'prueba prueba',4,'2024-11-20',4),(20,6,'prueba 2',5,'2024-11-20',4);
+INSERT INTO `resenas_guias` VALUES (1,1,'Excelente guía, muy conocedor de la ciudad.',5,'2024-11-15',1),(2,2,'Muy amable y profesional. Lo recomiendo.',4,'2024-11-16',2),(3,3,'Gran experiencia, pero podría ser más puntual.',3,'2024-11-17',3),(4,4,'Súper guía, nos ayudó mucho en el tour.',5,'2024-11-18',4),(5,5,'Conocía todos los secretos de la ciudad. Fascinante.',4,'2024-11-19',1),(6,6,'No estaba muy preparado para el clima, pero bien.',3,'2024-11-20',2),(7,7,'Gran actitud y súper carismática.',5,'2024-11-21',3),(8,8,'Podría mejorar la explicación en algunos puntos.',3,'2024-11-22',4),(9,9,'Nos mostró lugares ocultos, un gran guía.',5,'2024-11-23',1),(10,10,'Excelente comunicación y atención.',5,'2024-11-24',2),(11,11,'Un poco caro, pero valió la pena.',4,'2024-11-25',3),(12,12,'Muy profesional y atento. Recomendado.',5,'2024-11-26',4),(13,1,'Guía espectacular, aprendí muchísimo.',5,'2024-11-19',1),(14,1,'Estuvo ma o meno el guia.',3,'2024-11-20',3),(15,3,'Estuvo ma o meno el guia.',3,'2024-11-20',3),(16,5,'Estuvo ma o meno el guia.',2,'2024-11-20',2),(17,5,'Excelente guía, muy profesional.',5,'2024-11-20',1),(18,6,'hola',5,'2024-11-20',4),(19,6,'prueba prueba',4,'2024-11-20',4),(20,6,'prueba 2',5,'2024-11-20',4),(21,9,'nos atendió bien',4,'2024-11-22',1),(22,9,'hola',3,'2024-11-22',5);
 /*!40000 ALTER TABLE `resenas_guias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +225,7 @@ CREATE TABLE `usuarios` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -170,7 +234,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Luis Miguel ','lucho@example.com','12345623','2024-11-18 09:15:38'),(2,'jose jose','jose@correco.com','123456','2024-11-18 09:28:42'),(3,'Juan Pérez','juanperez@example.com','123456','2024-11-18 20:51:38'),(4,'miguel','miguel@correo.com','123456','2024-11-18 21:02:50');
+INSERT INTO `usuarios` VALUES (1,'Luis Miguel ','lucho@example.com','12345623','2024-11-18 09:15:38'),(2,'jose jose','jose@correco.com','123456','2024-11-18 09:28:42'),(3,'Juan Pérez','juanperez@example.com','123456','2024-11-18 20:51:38'),(4,'miguel','miguel@correo.com','123456','2024-11-18 21:02:50'),(5,'nom nom','ejemplo@ejemplo.com','123456','2024-11-22 19:55:21');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -183,4 +247,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-22  3:17:42
+-- Dump completed on 2024-12-03  2:16:24

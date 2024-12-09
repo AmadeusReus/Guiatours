@@ -8,6 +8,7 @@ const ciudadesRoutes = require('./routes/ciudades');
 const guiasRoutes = require('./routes/guias');
 const authRoutes = require('./routes/auth');
 const mensajesRoutes = require('./routes/mensajes');
+const contratosRoutes = require('./routes/contratosRoutes');
 
 const app = express();
 const PORT = 5000;
@@ -30,6 +31,8 @@ app.use('/api/ciudades', ciudadesRoutes);
 app.use('/api/guias', guiasRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/mensajes', mensajesRoutes);
+app.use('/api/contratos', contratosRoutes);
+
 
 // Ruta de prueba
 app.get('/', (req, res) => {
